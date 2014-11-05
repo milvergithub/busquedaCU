@@ -32,7 +32,7 @@ public class UIMapa extends javax.swing.JFrame {
         mapamodelo=new MapaModel();
         puntos=new HashMap<String,JLabel>();
         initComponents();
-        setSize(900, 650);
+        setSize(1000, 650);
         cargarPuntos();
     }
     public void cargarPuntos(){
@@ -68,6 +68,14 @@ public class UIMapa extends javax.swing.JFrame {
         jcbInicio = new javax.swing.JComboBox();
         jcbFinal = new javax.swing.JComboBox();
         btnMostrarMapa = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        detalleAT = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        detalleCosto = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -126,18 +134,20 @@ public class UIMapa extends javax.swing.JFrame {
                     .addGroup(panelLayout.createSequentialGroup()
                         .addGap(174, 174, 174)
                         .addComponent(biblioteca)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
                         .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(edificio_electro)
                             .addGroup(panelLayout.createSequentialGroup()
                                 .addComponent(edificio_cad_cam)
                                 .addGap(59, 59, 59)
                                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(planta_procesos_industriales)
-                                    .addComponent(laboratorio_mecanica))))
-                        .addGap(271, 271, 271))))
+                                    .addComponent(laboratorio_mecanica))
+                                .addGap(271, 271, 271))
+                            .addGroup(panelLayout.createSequentialGroup()
+                                .addComponent(edificio_electro)
+                                .addGap(148, 148, 148))))))
             .addGroup(panelLayout.createSequentialGroup()
                 .addGroup(panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelLayout.createSequentialGroup()
@@ -188,7 +198,7 @@ public class UIMapa extends javax.swing.JFrame {
                         .addComponent(laboratorio_mecanica, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5)
                 .addComponent(fiscom, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(departamento_industrial, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(41, 41, 41)
                 .addComponent(biblioteca, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -213,6 +223,22 @@ public class UIMapa extends javax.swing.JFrame {
             }
         });
 
+        detalleAT.setColumns(20);
+        detalleAT.setRows(5);
+        jScrollPane1.setViewportView(detalleAT);
+
+        detalleCosto.setColumns(20);
+        detalleCosto.setRows(5);
+        jScrollPane2.setViewportView(detalleCosto);
+
+        jLabel1.setText("costo busqueda");
+
+        jLabel2.setText("nodo inicial");
+
+        jLabel3.setText("nodos recorridos");
+
+        jLabel4.setText("nodo final");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -220,29 +246,66 @@ public class UIMapa extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jcbInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(jcbFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                        .addComponent(btnMostrarMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(115, 115, 115))
+                        .addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcbInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jcbFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43)
+                                .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnMostrarMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel1))
+                            .addComponent(jLabel4))
+                        .addGap(0, 53, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(817, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addGap(65, 65, 65)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnIniciar)
-                    .addComponent(jcbInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMostrarMapa))
-                .addGap(18, 18, 18)
-                .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addGap(6, 6, 6)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcbInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnIniciar)
+                            .addComponent(btnMostrarMapa)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(252, 252, 252)
+                    .addComponent(jLabel3)
+                    .addContainerGap(360, Short.MAX_VALUE)))
         );
 
         pack();
@@ -256,6 +319,8 @@ public class UIMapa extends javax.swing.JFrame {
         nodosAnteriores=new ArrayList<String>();//los nodos anteriores que recorrimos como raices
         //busca la ruta mas corta entre los posibles rutas la menor
         buscarRutaCorta(String.valueOf(jcbInicio.getSelectedItem()), String.valueOf(jcbFinal.getSelectedItem()));
+        //aniadimos en area de testo el detalle
+        aniadirDetalle();
         //creamos el objeto que se movera
         Persona p=new Persona((StageM)panel, rutaToPaint);
         //agregamos al escenario
@@ -269,6 +334,20 @@ public class UIMapa extends javax.swing.JFrame {
         mapaImg m=new mapaImg();
         m.setVisible(true);
     }//GEN-LAST:event_btnMostrarMapaActionPerformed
+    //imprimi todo el detalle
+    private void aniadirDetalle(){
+        String detalle="";
+        int distancia=0;
+        int pasos=0;
+        for (int i = 0; i < rutaToPaint.size()-1; i++) {
+            detalle=detalle+"raiz=> "+rutaToPaint.get(i).getNombre()+"\n";
+            distancia=distancia+getDistancia(rutaToPaint.get(i).getPointXY().x, rutaToPaint.get(i).getPointXY().y, rutaToPaint.get(i+1).getPointXY().x, rutaToPaint.get(i+1).getPointXY().y);
+            pasos=i;
+        }
+        detalle=detalle+"raiz=> "+rutaToPaint.get(pasos+1).getNombre()+"\n";
+        detalleAT.setText(detalle);
+        detalleCosto.setText("Costo : "+pasos+"\n"+"Costo Distancia : "+distancia);
+    }
     private void buscarRutaCorta(String origen,String destino){
         nodosAnteriores.add("kkkkk");
         //mientras no estemos en el destino y que el raiz tenga vecinos donde ir
@@ -362,9 +441,17 @@ public class UIMapa extends javax.swing.JFrame {
     private javax.swing.JLabel departamento_fisica;
     private javax.swing.JLabel departamento_industrial;
     private javax.swing.JLabel departamento_quimica;
+    private javax.swing.JTextArea detalleAT;
+    private javax.swing.JTextArea detalleCosto;
     private javax.swing.JLabel edificio_cad_cam;
     private javax.swing.JLabel edificio_electro;
     private javax.swing.JLabel fiscom;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox jcbFinal;
     private javax.swing.JComboBox jcbInicio;
     private javax.swing.JLabel laboratorio_mecanica;
