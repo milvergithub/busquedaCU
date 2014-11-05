@@ -1,5 +1,6 @@
 package view;
 
+import controller.Persona;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +12,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import model.MapaModel;
 import model.Nodo;
 import model.Rutas;
+import world.StageM;
 /**
  * @author milver flores <mfflowg@gmail.com>
  */
@@ -65,6 +67,7 @@ public class UIMapa extends javax.swing.JFrame {
         btnIniciar = new javax.swing.JButton();
         jcbInicio = new javax.swing.JComboBox();
         jcbFinal = new javax.swing.JComboBox();
+        btnMostrarMapa = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -203,6 +206,13 @@ public class UIMapa extends javax.swing.JFrame {
 
         jcbFinal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "bloque_central", "departamento_quimica", "departamento_biologia", "edificio_electro", "departamento_fisica", "edificio_cad_cam", "laboratorio_mecanica", "biblioteca", "departamento_industrial", "fiscom", "planta_procesos_industriales" }));
 
+        btnMostrarMapa.setText("mostrar");
+        btnMostrarMapa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarMapaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -216,8 +226,10 @@ public class UIMapa extends javax.swing.JFrame {
                         .addGap(27, 27, 27)
                         .addComponent(jcbFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
-                        .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(161, Short.MAX_VALUE))
+                        .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
+                        .addComponent(btnMostrarMapa, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(115, 115, 115))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,7 +238,8 @@ public class UIMapa extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnIniciar)
                     .addComponent(jcbInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMostrarMapa))
                 .addGap(18, 18, 18)
                 .addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -236,14 +249,30 @@ public class UIMapa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        costoRuta=0;
-        nodoAnterior="kkkkk";
-        rutaToPaint=new ArrayList<Rutas>();
-        nodosAnteriores=new ArrayList<String>();
+        
+        costoRuta=0;//iniciamos el costo de la ruta que es 0
+        nodoAnterior="kkkkk"; // el nodo anterior que recorrimos al inicio no hay nada asi que colocamos lo que sea
+        rutaToPaint=new ArrayList<Rutas>();//en esta lista agregamos las rutas que recorremos
+        nodosAnteriores=new ArrayList<String>();//los nodos anteriores que recorrimos como raices
+        //busca la ruta mas corta entre los posibles rutas la menor
         buscarRutaCorta(String.valueOf(jcbInicio.getSelectedItem()), String.valueOf(jcbFinal.getSelectedItem()));
+        //creamos el objeto que se movera
+        Persona p=new Persona((StageM)panel, rutaToPaint);
+        //agregamos al escenario
+        panel.add(p);
+        //creamos e iniciamos
+        Thread hilo=new Thread(p);
+        hilo.start();
     }//GEN-LAST:event_btnIniciarActionPerformed
+
+    private void btnMostrarMapaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarMapaActionPerformed
+        mapaImg m=new mapaImg();
+        m.setVisible(true);
+    }//GEN-LAST:event_btnMostrarMapaActionPerformed
     private void buscarRutaCorta(String origen,String destino){
         nodosAnteriores.add("kkkkk");
+        //mientras no estemos en el destino y que el raiz tenga vecinos donde ir
+        //menos de los que venimos o ya pasamos por alguno esos son descartados
         while (!(origen.equals(destino))&&!(vecinosPorRecorrer(origen).length==0)) {            
             System.out.println("raiz => "+origen);
             rutaToPaint.add(new Rutas(puntos.get(origen).getX(), puntos.get(origen).getY(), origen));
@@ -258,6 +287,7 @@ public class UIMapa extends javax.swing.JFrame {
             rutaToPaint.add(new Rutas(puntos.get(destino).getX(), puntos.get(destino).getY(), destino));
         }
     }
+    //este metodo obtiene el mejor vecino
     private String mejorVecino(String origen,String[] vecinos){
         int [] distancias=new int[vecinos.length];
         for (int i = 0; i < vecinos.length; i++) {
@@ -266,6 +296,7 @@ public class UIMapa extends javax.swing.JFrame {
         int pos=rutaMasCorta(distancias);
         return vecinos[pos];
     }
+    //obtiene la ruta mas corta
     private int rutaMasCorta(int dist[]){
         int posx=0;
         for (int i = 1; i < dist.length; i++) {
@@ -326,6 +357,7 @@ public class UIMapa extends javax.swing.JFrame {
     private javax.swing.JLabel biblioteca;
     private javax.swing.JLabel bloque_central;
     private javax.swing.JButton btnIniciar;
+    private javax.swing.JButton btnMostrarMapa;
     private javax.swing.JLabel departamento_biologia;
     private javax.swing.JLabel departamento_fisica;
     private javax.swing.JLabel departamento_industrial;

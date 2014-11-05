@@ -33,9 +33,11 @@
                       <Component id="jcbFinal" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       <Component id="btnIniciar" min="-2" pref="119" max="-2" attributes="0"/>
+                      <EmptySpace pref="47" max="32767" attributes="0"/>
+                      <Component id="btnMostrarMapa" min="-2" pref="118" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="161" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -47,6 +49,7 @@
                   <Component id="btnIniciar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jcbInicio" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jcbFinal" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnMostrarMapa" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="panel" max="32767" attributes="0"/>
@@ -336,6 +339,14 @@
           </StringArray>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnMostrarMapa">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="mostrar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMostrarMapaActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

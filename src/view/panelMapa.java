@@ -9,12 +9,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import world.StageM;
 
 /**
  *
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class panelMapa extends JPanel{
+public class panelMapa extends StageM{
     public panelMapa(){
         
     }
