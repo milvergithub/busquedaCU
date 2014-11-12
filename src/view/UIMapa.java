@@ -354,6 +354,7 @@ public class UIMapa extends javax.swing.JFrame {
         //menos de los que venimos o ya pasamos por alguno esos son descartados
         while (!(origen.equals(destino))&&!(vecinosPorRecorrer(origen).length==0)) {            
             System.out.println("raiz => "+origen);
+            //agregamos coordenadas X Y en la lista
             rutaToPaint.add(new Rutas(puntos.get(origen).getX(), puntos.get(origen).getY(), origen));
             String vecinos[]=vecinosPorRecorrer(origen);
             System.out.println("tamanio : "+vecinos.length);
@@ -385,6 +386,7 @@ public class UIMapa extends javax.swing.JFrame {
         }
         return posx;
     }
+    //distancia entre dos puntos en px
     private int getDistancia(int xi,int yi,int xf,int yf){
         return (int)Math.hypot(xf-xi, yf-yi);
     }

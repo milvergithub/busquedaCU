@@ -138,13 +138,10 @@
                                       <Component id="planta_procesos_industriales" min="-2" max="-2" attributes="0"/>
                                       <Component id="laboratorio_mecanica" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="271" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="edificio_electro" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="edificio_electro" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="271" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
